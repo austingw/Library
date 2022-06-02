@@ -37,14 +37,12 @@ const addBookForm = document.querySelector('.bookForm');
 addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const data = new FormData(e.target);
-  let newBook = {};
-  addBookToLibrary(
-    newBook['bookTitle'],
-    newBook['bookAuthor'],
-    newBook['bookPages'],
-    newBook['readStatus']
-  );
+  const title = document.querySelector('#bookTitle').value;
+  const author = document.querySelector('#bookAuthor').value;
+  const pages = document.querySelector('#bookPages').value;
+  const readStatus = document.querySelector('input[name="bookReadStatus"]:checked').value;
+
+  addBookToLibrary(title, author, pages, readStatus)
   addBookForm.reset();
   modal.style.display = "none";
 });
@@ -52,10 +50,6 @@ addBookForm.addEventListener('submit', (e) => {
 function deleteBook(index) {
   myLibrary.splice(index, 1);
   saveAndDisplay();
-}
-
-function markRead(index) {
-  myLibrary[parseInt(index)].read = true;
 }
 
 function addLocalStorage() {
@@ -77,27 +71,38 @@ function createBookItem(book, index) {
     bookItem.setAttribute('key', index);
     bookItem.setAttribute('class', 'cards');
     bookItem.appendChild(
-      createBookElement('h1', `Title: ${book.title}`, 'book-title')
+      createBookElement('h1', `Title: ${book.title}`, 'bookTitle')
     );
     bookItem.appendChild(
-      createBookElement('h1', `Author: ${book.author}`, 'book-author')
+      createBookElement('h1', `Author: ${book.author}`, 'bookAuthor')
     );
     bookItem.appendChild(
-      createBookElement('h1', `Pages: ${book.pages}`, 'book-pages')
+      createBookElement('h1', `Pages: ${book.pages}`, 'bookPages')
     );
     bookItem.appendChild(
-        createBookElement('h1', `Read: ${book.readStatus}`, 'book-readStatus')
+        createBookElement('h1', `Read: ${book.readStatus}`, 'bookReadStatus')
     );
+    
+    bookItem.appendChild(createBookElement('button', 'Toggle Read Status', 'toggleReadStatus'));
+    
     bookItem.appendChild(createBookElement('button', 'X', 'delete'));
     
+    bookItem.querySelector('.toggleReadStatus').addEventListener('click', () => {
+      if (book.readStatus = 'no'){
+        book.readStatus = 'yes'
+        saveAndDisplay();
+      }
+    });
+
     bookItem.querySelector('.delete').addEventListener('click', () => {
-      deleteBook(index)
+      deleteBook(index);
     });
 
     books.insertAdjacentElement('afterbegin', bookItem);
   }
 
   function displayBooks() {
+    books.textContent = '';
     myLibrary.map((book, index) => {
       createBookItem(book, index);
     });
@@ -109,7 +114,4 @@ function createBookItem(book, index) {
   }
 
 addLocalStorage();
-
-// EighthGrader.prototype = Object.create(Student.prototype) //
-
 
