@@ -18,12 +18,14 @@ window.onclick = function(e){
 
 let books = document.querySelector('.books');
 
-function Book(title, author, pages, readStatus) {
+class Book {
+    constructor(title, author, pages, readStatus) {
     this.title = title
     this.author = author
     this.pages = pages
     this.readStatus = readStatus
     this.id = Math.floor(Math.random() * 1000000);
+  }
 }
 
 let myLibrary = [];
@@ -83,7 +85,7 @@ function createBookItem(book, index) {
         createBookElement('h1', `Read: ${book.readStatus}`, 'bookReadStatus')
     );
     
-    bookItem.appendChild(createBookElement('button', 'Toggle Read Status', 'toggleReadStatus'));
+    bookItem.appendChild(createBookElement('button', 'Update Read Status', 'toggleReadStatus'));
     
     bookItem.appendChild(createBookElement('button', 'X', 'delete'));
     

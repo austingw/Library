@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
+    <title>Bookworm Reading List</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header">
-        <div class="menuItems">
-            Library
+        <img src="/bookworm.png">
+        <div id="libraryTitle">
+            <h2>Bookworm Reading List</h2>
         </div>
+        <button id="modalBtn">Add Book</button>
     </div>
     <div id="body">
-        <button id="modalBtn">Add Book</button>
+       
         <div class="modal">
             <div class="modalContent">
               <span class="closeBtn">&#10005;</span>
                 <form class="bookForm">
                     <label for="bookTitle">Title</label>
-                    <input type="text" name="bookTitle" id="bookTitle">
+                    <input type="text" name="bookTitle" id="bookTitle" required>
                     <label for="bookAuthor">Author</label>
-                    <input type="text" name="bookAuthor" id="bookAuthor">
+                    <input type="text" name="bookAuthor" id="bookAuthor" required>
                     <label for="bookPages"># of Pages</label>
-                    <input type="number" name="bookPages" id="bookPages">
+                    <input type="number" name="bookPages" id="bookPages" required>
                     <label for="bookReadStatus">Have you read it?</label>
-                    <input type="radio" name="bookReadStatus" id="yes" value="yes">yes
+                    <input type="radio" name="bookReadStatus" id="yes" value="yes">yes                    
                     <input type="radio" name="bookReadStatus" id="no" value="no">no
                     <button type="submit">Add book to Library</button>
                 </form>
